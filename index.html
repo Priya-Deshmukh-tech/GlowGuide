@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f7f2">
+  <meta name="description" content="GlowGuide discovers skincare routine patterns with Apriori and FP-Growth, with morning and evening context built in.">
+  <title>GlowGuide — Routine intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="GlowGuide home"><span class="brand-mark">g<span>✳</span></span><span>glowguide<small>ROUTINE INTELLIGENCE</small></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <a class="nav-item active" href="#overview"><span class="nav-icon">◫</span> Overview</a>
+        <a class="nav-item" href="#patterns"><span class="nav-icon">⌘</span> Pattern explorer <i class="nav-count" id="nav-pattern-count">—</i></a>
+        <a class="nav-item" href="#compare"><span class="nav-icon">◷</span> Routine comparison</a>
+        <a class="nav-item" href="#dataset"><span class="nav-icon">▤</span> Dataset</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note"><span class="note-dot"></span><div><b>Demo dataset</b><small>Generated examples · not real users</small></div></div>
+        <div class="profile"><div class="avatar">GG</div><div><b>GlowGuide Lab</b><small>Local workspace</small></div><span class="profile-more">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar"><div class="crumb">Workspace <span>/</span> <b>Overview</b></div><div class="top-actions"><div class="live-status"><span></span><span id="load-status">Loading dataset</span></div><button class="icon-button" id="help-button" aria-label="About this demo">?</button></div></header>
+      <section class="welcome-row">
+        <div><p class="eyebrow">TUESDAY, OCTOBER 14, 2026 <span class="eyebrow-line"></span> YOUR ROUTINE, UNDERSTOOD</p><h1>Good patterns,<br><em>clearer routines.</em></h1><p class="welcome-copy">Explore how skincare products appear together, and see how those patterns shift from morning to evening.</p></div>
+        <div class="hero-art" aria-hidden="true"><div class="sun-orbit"></div><div class="bottle bottle-one"><span>GLOW</span></div><div class="bottle bottle-two"><span>DAILY</span></div><div class="leaf leaf-one"></div><div class="leaf leaf-two"></div><div class="art-spark">✳</div><div class="art-caption">a little insight<br>goes a long way</div></div>
+      </section>
+      <section class="metric-grid" aria-label="Dataset summary">
+        <article class="metric-card"><div class="metric-top"><span>ROUTINE TRANSACTIONS</span><span class="metric-icon mint">⌁</span></div><div class="metric-value" id="metric-routines">—</div><div class="metric-foot"><span class="mini-dot"></span> Morning + evening routines</div><div class="sparkline"><svg viewBox="0 0 180 38" preserveAspectRatio="none"><path d="M0 29 C18 25 25 30 40 18 S63 25 78 17 99 23 116 11 139 18 151 9 169 14 180 3"/></svg></div></article>
+        <article class="metric-card"><div class="metric-top"><span>RESPONDENT PROFILES</span><span class="metric-icon peach">◎</span></div><div class="metric-value" id="metric-people">—</div><div class="metric-foot"><span class="mini-dot peach-dot"></span> Synthetic profiles</div><div class="metric-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="metric-card"><div class="metric-top"><span>PRODUCTS IN CATALOG</span><span class="metric-icon lavender">✿</span></div><div class="metric-value" id="metric-products">—</div><div class="metric-foot"><span class="mini-dot lavender-dot"></span> Across <b id="metric-categories">—</b> categories</div><div class="category-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        <article class="metric-card accent-card"><div class="metric-top"><span>CONTEXTS READY</span><span class="metric-icon cream">◷</span></div><div class="metric-value">02</div><div class="metric-foot"><span class="context-pill">AM</span> Morning <span class="context-sep">·</span> <span class="context-pill pm">PM</span> Evening</div><div class="context-ribbons"><span></span><span></span></div></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel pattern-panel" id="patterns">
+          <div class="panel-heading"><div><div class="section-kicker">DISCOVERY ENGINE <span class="spark">✳</span></div><h2>Association patterns</h2><p>Frequent product combinations mined from routine transactions.</p></div><button class="button button-outline" id="export-button">↧ <span>Export rules</span></button></div>
+          <div class="controls-row">
+            <label class="select-wrap"><span>CONTEXT</span><select id="context-filter"><option value="all">All routines</option><option value="morning">Morning only</option><option value="evening">Evening only</option></select></label>
+            <label class="select-wrap"><span>SKIN PROFILE</span><select id="skin-filter"><option value="all">All skin types</option></select></label>
+            <label class="select-wrap algo-select"><span>ALGORITHM</span><select id="algorithm-filter"><option value="both">Compare both</option><option value="apriori">Apriori</option><option value="fp">FP-Growth</option></select></label>
+            <button class="button button-primary" id="run-button"><span class="run-glyph">↗</span> Run analysis</button>
+          </div>
+          <div class="threshold-row"><label for="support-range">Minimum support <b id="support-label">2.2%</b></label><input id="support-range" type="range" min="0.5" max="8" step="0.1" value="2.2"><span class="threshold-divider"></span><label for="confidence-range">Minimum confidence <b id="confidence-label">35%</b></label><input id="confidence-range" type="range" min="10" max="90" step="1" value="35"></div>
+          <div class="results-head"><div><span class="tiny-label">TOP DISCOVERIES</span><span class="result-subtitle" id="result-summary">Preparing transactions…</span></div><div class="sort-control">SORT BY <select id="sort-filter"><option value="fit">Glow score</option><option value="support">Support</option><option value="confidence">Confidence</option><option value="lift">Lift</option></select></div></div>
+          <div class="rules-list" id="rules-list"><div class="empty-state"><div class="loader"></div><b>Preparing your discovery space</b><span>Reading routines and product catalog…</span></div></div>
+          <div class="panel-foot"><span><span class="foot-dot"></span> Rules use product IDs as items in each routine</span><span id="engine-note">Glow score blends confidence, lift and support reliability</span></div>
+        </article>
+
+        <aside class="right-column">
+          <article class="panel insight-panel" id="compare">
+            <div class="section-kicker">ROUTINE CONTEXT <span class="pill-live">LIVE VIEW</span></div><h2>Morning to<br>evening shift</h2><p>Compare how product pairings move across the day.</p>
+            <div class="context-chart" id="context-chart"><div class="chart-loading">Loading context comparison…</div></div>
+            <div class="chart-legend"><span><i class="legend-morning"></i>Morning</span><span><i class="legend-evening"></i>Evening</span></div>
+            <div class="shift-callout"><div class="callout-icon">↗</div><div><b id="shift-title">Your day has a rhythm</b><span id="shift-copy">Context patterns will appear after analysis.</span></div></div>
+          </article>
+          <article class="panel logic-panel"><div class="logic-icon">✳</div><div><div class="section-kicker">A MORE THOUGHTFUL LENS</div><h3>Context-aware mining</h3><p>Glow score balances confidence, lift and how often a pattern appears. We also compare each rule across morning and evening.</p><a href="#methodology" id="method-link">How the logic works <span>→</span></a></div></article>
+        </aside>
+      </section>
+
+      <section class="lower-grid" id="dataset">
+        <article class="panel category-panel"><div class="panel-heading compact"><div><div class="section-kicker">THE COLLECTION</div><h2>What’s in the routine?</h2></div><span class="panel-badge" id="category-total">30 products</span></div><div id="category-bars" class="category-bars"></div></article>
+        <article class="panel profile-panel"><div class="panel-heading compact"><div><div class="section-kicker">PROFILE MIX</div><h2>Skin types represented</h2></div><span class="panel-badge">Synthetic</span></div><div id="skin-mix" class="skin-mix"></div><div class="profile-foot"><span>Profiles are generated for demonstration</span><span>ⓘ</span></div></article>
+      </section>
+      <footer class="footer"><span>✳ GLOWGUIDE <span class="footer-muted">· Routine intelligence for learning</span></span><span id="data-provenance">Synthetic demonstration dataset · Generated examples only</span><a href="#methodology" id="footer-method">Methodology</a></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal" hidden><section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div class="section-kicker">GLOWGUIDE FIELD NOTES</div><h2 id="modal-title">How Glow score works</h2><p>GlowGuide treats each routine as a basket of products and mines recurring co-usage patterns. Apriori builds frequent itemsets level by level; FP-Growth compresses baskets into a prefix tree and mines conditional patterns.</p><div class="formula-card"><b>Glow score</b><code>100 × confidence × (0.65 + 0.35 × min(lift, 3) / 3) × support reliability</code><span>Support reliability grows as a pattern appears in more transactions. It is a ranking aid, not a clinical score.</span></div><p>Routine context comparison checks the same pair in morning and evening baskets, then labels a pattern by its stronger context. The dataset is synthetic; discovered rules demonstrate the implementation and should not guide medical decisions.</p><button class="button button-primary modal-done" id="modal-done">Got it</button></section></div>
+  <script src="app.js"></script>
+</body>
+</html>

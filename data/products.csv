@@ -1,0 +1,31 @@
+﻿product_id,product_name,product_category,suggested_skin_group
+P001,Gentle Foaming Cleanser,Cleanser,all
+P002,Cream Cleanser,Cleanser,dry
+P003,Salicylic Acid Cleanser,Cleanser,oily
+P004,Hydrating Toner,Toner,all
+P005,Niacinamide Serum,Serum,all
+P006,Vitamin C Serum,Serum,all
+P007,Hyaluronic Acid Serum,Serum,dry
+P008,Retinol Serum,Treatment,all
+P009,Azelaic Acid Treatment,Treatment,all
+P010,Benzoyl Peroxide Spot Gel,Treatment,oily
+P011,Lightweight Gel Moisturizer,Moisturizer,oily
+P012,Barrier Repair Cream,Moisturizer,dry
+P013,Ceramide Moisturizer,Moisturizer,all
+P014,Broad Spectrum SPF 50 Sunscreen,Sunscreen,all
+P015,Mineral SPF 50 Sunscreen,Sunscreen,sensitive
+P016,Oil Cleanser,Makeup Remover,all
+P017,Micellar Water,Makeup Remover,all
+P018,Exfoliating AHA Serum,Exfoliant,all
+P019,Soothing Centella Serum,Serum,sensitive
+P020,Lip Balm SPF 30,Lip Care,all
+P021,Eye Cream,Eye Care,all
+P022,Clay Mask,Mask,oily
+P023,Overnight Hydrating Mask,Mask,dry
+P024,Peptide Serum,Serum,all
+P025,Caffeine Eye Serum,Eye Care,all
+P026,Fragrance-Free Moisturizer,Moisturizer,sensitive
+P027,Tinted Mineral Sunscreen,Sunscreen,sensitive
+P028,Pimple Patch,Spot Treatment,all
+P029,Body Sunscreen SPF 30,Sunscreen,all
+P030,Hydrating Essence,Essence,dry
