@@ -539,37 +539,50 @@ function renderRules() {
         })
         .join("");
 }
-
 function contextTilt(ruleKey) {
-    const [ante, con] = ruleKey.split("=>");
-    const ids = ante.split("+").concat(con).sort();
+    const context = state.filters.context;
+    const skin = state.filters.skin;
 
-    let am = 0,
-        pm = 0,
-        amN = 0,
-        pmN = 0;
-
-    for (const r of state.routines) {
-        if (state.filters.skin !== "all" && r.skin_type !== state.filters.skin)
-            continue;
-
-        if (ids.every((x) => r.items.includes(x))) {
-            if (r.routine_context === "morning") am++;
-            else pm++;
-        }
-
-        if (r.routine_context === "morning") amN++;
-        else pmN++;
+    // A single-context view must never display the opposite context.
+    if (context === "morning") {
+        return { label: "Morning-only", css: "" };
     }
 
-    const a = am / Math.max(amN, 1),
-        b = pm / Math.max(pmN, 1),
-        delta = a - b;
+    if (context === "evening") {
+        return { label: "Evening-only", css: "evening" };
+    }
 
-    if (Math.abs(delta) < 0.002)
+    const [ante, con] = ruleKey.split("=>");
+    const items = ante.split("+").concat(con).sort();
+
+    let morningCount = 0;
+    let eveningCount = 0;
+    let morningTotal = 0;
+    let eveningTotal = 0;
+
+    // Compare contexts only within the selected skin profile.
+    for (const r of state.routines) {
+        if (skin !== "all" && r.skin_type !== skin) continue;
+
+        const contains = items.every(item => r.items.includes(item));
+
+        if (r.routine_context === "morning") {
+            morningTotal++;
+            if (contains) morningCount++;
+        } else if (r.routine_context === "evening") {
+            eveningTotal++;
+            if (contains) eveningCount++;
+        }
+    }
+
+    const morningRate = morningCount / Math.max(morningTotal, 1);
+    const eveningRate = eveningCount / Math.max(eveningTotal, 1);
+
+    if (Math.abs(morningRate - eveningRate) < 0.002) {
         return { label: "Balanced", css: "balanced" };
+    }
 
-    return delta > 0
+    return morningRate > eveningRate
         ? { label: "Morning-led", css: "" }
         : { label: "Evening-led", css: "evening" };
 }
